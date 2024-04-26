@@ -45,9 +45,9 @@ El proyecto está finalizado, pero se presta a incluir funcionalidades adicional
 </p>
 
 ## Tecnologías usadas
-La aplicación está hecha en Java ver 17
-Para desarollar el código usé IntelliJ.
-Para preparar la imagen UML me apoye con lucidchart.com
+- La aplicación está hecha en Java ver 17
+- Para desarollar el código usé IntelliJ.
+- Para preparar la imagen UML me apoye con lucidchart.com
 
 ## Licencia
 GNU General Public License v3.0
