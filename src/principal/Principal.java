@@ -1,42 +1,54 @@
 package principal;
 
-import modelos.ConsultaConversion;
-import modelos.Conversion;
-import modelos.ConversionGson;
-import modelos.Datos;
+import modelos.*;
+//import modelos.Conversion;
 
-import java.io.IOException;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+// Conversor hace varias conversiones de monedas, datos ingresados desde teclado
+// En el final imprime todas las conversiones hechas con fecha y hora de realización
 public class Principal{
     public static void main(String[] args) {
 
-        ConversionGson mapaDeConversiones;
-        Double montoDeCotizacion;
+        Boolean repetirConversiones = true;
+        Map<String,Double> mapaDeTasas;
+        // ArrayList para almacenar fechas y horas de conversiones hechas
+        List<String> fechasYHoras = new ArrayList<>();
+        // ArrayList para almacenar las conversiones hechas
+        List<List<Object>> conversiones = new ArrayList<>();
 
-        while(true) {
+        while(repetirConversiones) {
             Datos datos = new Datos();
             datos.RecibeDatos();
-            if (datos.getMontoBase() == -1.0){
+            if (datos.isErrorEnDatos()){
                 continue;
-            }
+            } else if (!datos.isExit()) {
 
-            //Consultamos exchangerate.com y regresamos Gson
-            ConsultaConversion consulta = new ConsultaConversion();
-            mapaDeConversiones = consulta.BuscaConversiones(datos.getMonedaBase());
-            if (mapaDeConversiones == null) {
-                continue;
+                // Consultamos exchangerate-api.com y regresamos Map de tasas de cambio
+                ConsultaTasas consulta = new ConsultaTasas();
+                consulta.EncuentraTasas(datos.getMonedaBase());
+                mapaDeTasas = consulta.getMapaDeTasas();
+                if (!(mapaDeTasas == null)) {
+
+                    // Encontramos la tasa de cambio y calculamos el monto de cotisación
+                    Conversion conversion = new Conversion();
+                    conversion.Convierte(datos.getMonedaBase(), datos.getMontoBase(),
+                            datos.getMonedaDeCotizacion(), mapaDeTasas);
+
+                    if(!(conversion.getAhora() == null) && !(conversion.getNuevaConversion() == null)){
+                        fechasYHoras.add(conversion.getAhora());
+                        conversiones.add(conversion.getNuevaConversion());
+                    }
+                }
 
             } else {
-                //Calculamos el monto de cotización
-                Conversion conversion = new Conversion(mapaDeConversiones);
-                montoDeCotizacion = conversion.Convierte(datos.getMonedaDeCotizacion(), datos.getMontoBase());
-                if (montoDeCotizacion == -1.0){
-                    continue;
-                }
+                Impresion impresion = new Impresion();
+                impresion.Imprime(fechasYHoras, conversiones);
+                repetirConversiones = false;
             }
-
-            System.out.println(String.format("%.2f %s = %.2f %s", datos.getMontoBase(), datos.getMonedaBase(),
-                    montoDeCotizacion, datos.getMonedaDeCotizacion()));
 
         }
 
