@@ -21,7 +21,7 @@ public class ConsultaTasas {
     }
 
     // Método EncuentraTasas recibe el parametro moneda en el estándar ISO 4217,
-    // tres letras mayusculas, lee el API key del archivo APIkey.txt,
+    // lee el API key del archivo APIkey.txt,
     // encuentra la tabla completa de tasas de cambio en exchangerate-api.com
     // y la convierte en Map<String, Double>
     public void EncuentraTasas(String moneda){

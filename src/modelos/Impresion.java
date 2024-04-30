@@ -2,8 +2,13 @@ package modelos;
 
 import java.util.List;
 
+// Clase Impresión está encargada de la impresión final.
 public class Impresion {
 
+    // Método Imprime obtiene dos parametros: la lista de strings que contienen
+    // la fecha y la hora de las conversiones y la lista de los datos de cada
+    // conversión que también son listas. El resultado es la impresión de todas
+    // las conversiones con sus fechas y horas de realización.
     public void Imprime (List<String> fechasYHoras, List<List<Object>> conversiones){
 
         System.out.println("Gracias por usar nuestro conversor de monedas.");

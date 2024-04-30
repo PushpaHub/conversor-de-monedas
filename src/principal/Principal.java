@@ -1,19 +1,18 @@
 package principal;
 
 import modelos.*;
-//import modelos.Conversion;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 // Conversor hace varias conversiones de monedas, datos ingresados desde teclado
-// En el final imprime todas las conversiones hechas con fecha y hora de realización
+// En el final imprime todas las conversiones hechas con fechas y horas de realización
 public class Principal{
     public static void main(String[] args) {
 
         Boolean repetirConversiones = true;
+        // Mapa de todas las tasas de cambio
         Map<String,Double> mapaDeTasas;
         // ArrayList para almacenar fechas y horas de conversiones hechas
         List<String> fechasYHoras = new ArrayList<>();

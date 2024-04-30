@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+// Clase Conversión está encargada de jacer la conversión requerida.
 public class Conversion {
 
     private String monedaBase;
@@ -49,6 +50,11 @@ public class Conversion {
     public List<Object> getNuevaConversion() {
         return nuevaConversion;
     }
+
+    // Método Convierte es un método independiente que recibe cuatro parametros:
+    // moneda base, monto base, moneda de cotización y el mapa de tasas de cambio.
+    // El resultado que proporciona es la lista que contiene estos cuatro datos y
+    // el monto de conversión y la lista de fecha y hora de la conversion.
 
     public void Convierte(String monedaBase, Double montoBase,
                           String monedaDeCotizacion, Map<String,Double> mapaDeTasas){

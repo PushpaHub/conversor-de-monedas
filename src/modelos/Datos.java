@@ -50,6 +50,8 @@ public class Datos {
     // moneda base, moneda de cotizacion y monto para convertir
     // En caso de error de teclado regresa valor errorEnDatos = true y
     // la clase Principal (main) retoma el proceso desde inicio
+    // En caso de precionar Enter sin escribir regresa valor exit = true y
+    // la clase Principal (main) toma el proceso de terminar
     public void RecibeDatos (){
         System.out.println(menu);
 
